@@ -12,14 +12,14 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "hydrus";
-  version = "520";
+  version = "542";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "hydrusnetwork";
     repo = "hydrus";
     rev = "refs/tags/v${version}";
-    hash = "sha256-y8KfPe3cBBq/iPCG7hNXrZDkOSNi+qSir6rO/65SHkI=";
+    hash = "sha256-CGa6u858t+Be9VGv8RTl4D0FX+fcafN/Xevy2hv52II=";
   };
 
   nativeBuildInputs = [
@@ -78,6 +78,7 @@ python3Packages.buildPythonPackage rec {
     -e TestClientDBTags \
     -e TestClientImageHandling \
     -e TestClientImportOptions \
+    -e TestClientFileStorage \
     -e TestClientListBoxes \
     -e TestClientMigration \
     -e TestClientNetworking \
@@ -105,8 +106,8 @@ python3Packages.buildPythonPackage rec {
 
     # install the hydrus binaries
     mkdir -p $out/bin
-    install -m0755 server.py $out/bin/hydrus-server
-    install -m0755 client.py $out/bin/hydrus-client
+    install -m0755 hydrus_server.py $out/bin/hydrus-server
+    install -m0755 hydrus_client.py $out/bin/hydrus-client
   '' + lib.optionalString enableSwftools ''
     mkdir -p $out/${python3Packages.python.sitePackages}/bin
     # swfrender seems to have to be called sfwrender_linux
